@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(node -e \"console.log\\('recharts 版本:', require\\('recharts/package.json'\\).version\\)\")",
+      "Bash(env -u ELECTRON_RUN_AS_NODE npm run dev)",
+      "Bash(taskkill //F //IM electron.exe)"
+    ]
+  }
+}
