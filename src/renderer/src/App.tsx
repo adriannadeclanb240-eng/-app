@@ -4,6 +4,7 @@ import ExpenseList from './components/ExpenseList'
 import CategoryManager from './components/CategoryManager'
 import Statistics from './components/Statistics'
 import BudgetCard from './components/BudgetCard'
+import SnakeGame from './components/SnakeGame'
 import type {
   CategoryTreeNode,
   ExpenseWithCategory,
@@ -17,7 +18,7 @@ function App(): React.JSX.Element {
   const [expenses, setExpenses] = useState<ExpenseWithCategory[]>([])
   const [budgetCents, setBudgetCents] = useState(0)
   const [loading, setLoading] = useState(true)
-  const [view, setView] = useState<'ledger' | 'stats' | 'categories'>('ledger')
+  const [view, setView] = useState<'ledger' | 'stats' | 'categories' | 'game'>('ledger')
 
   const refresh = useCallback(async (): Promise<void> => {
     const [c, e, b] = await Promise.all([
@@ -134,6 +135,12 @@ function App(): React.JSX.Element {
         >
           分类管理
         </button>
+        <button
+          className={view === 'game' ? 'tab active' : 'tab'}
+          onClick={() => setView('game')}
+        >
+          小游戏
+        </button>
       </nav>
 
       {view === 'ledger' && (
@@ -169,6 +176,13 @@ function App(): React.JSX.Element {
             onRename={handleRenameCategory}
             onDelete={handleDeleteCategory}
           />
+        </section>
+      )}
+
+      {view === 'game' && (
+        <section className="card">
+          <h2>贪吃蛇</h2>
+          <SnakeGame />
         </section>
       )}
     </div>
